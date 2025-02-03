@@ -1,0 +1,21 @@
+services:
+  service-inventory:
+    build:
+      context: ./service-inventory
+      dockerfile: Dockerfile
+    container_name: service-inventory
+    network_mode: bridge
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    network_mode: bridge
+    environment:
+      MYSQL_ROOT_PASSWORD: 2357
+    volumes:
+     - ./db-scripts/mysql-init.sql:/docker-entrypoint-initdb.d/mysql-init.sql
