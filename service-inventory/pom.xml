@@ -115,6 +115,7 @@
             <scope>test</scope>
         </dependency>
 
+
     </dependencies>
 
     <build>
@@ -153,7 +154,7 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<inputSpec>${project.basedir}/src/main/resources/contract/service-inventori.yml</inputSpec>
+							<inputSpec>/Users/yefer/Git/inventory-order-services/contract/service-inventori.yml</inputSpec>
 							<generatorName>spring</generatorName>
 							<supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
 							<configOptions>

@@ -1,6 +1,8 @@
 spring:
   application:
     name: Microservices Inventory
+  profiles:
+    active: local  # Activa el perfil "local"
 
 server:
   port: 8081
