@@ -1,15 +1,14 @@
 package com.ynova.service_inventory.expose;
 
-
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
-
 
 import com.ynova.service_inventory.api.InventoryApi;
 import com.ynova.service_inventory.api.InventoryApiDelegate;
 import com.ynova.service_inventory.dto.InventoryRequest;
 import com.ynova.service_inventory.dto.InventoryResponse;
 import com.ynova.service_inventory.dto.OrderInvRequest;
+import com.ynova.service_inventory.service.InventoryService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +19,8 @@ import reactor.core.publisher.Mono;
 @Slf4j
 @AllArgsConstructor
 public class InventoryApiImpl implements InventoryApiDelegate {
+
+    private final InventoryService inventoryService;
 
     /**
      * GET /inventories/{productId} : Obtener el inventario de un producto en
@@ -33,6 +34,7 @@ public class InventoryApiImpl implements InventoryApiDelegate {
     @Override
     public Mono<InventoryResponse> getInventory(String productId, ServerWebExchange exchange) {
 
+        return inventoryService.getInventory(productId);
     }
 
     /**
@@ -42,7 +44,7 @@ public class InventoryApiImpl implements InventoryApiDelegate {
      * @see InventoryApi#listInventory
      */
     public Flux<InventoryResponse> listInventory(ServerWebExchange exchange) {
-
+        return inventoryService.getList();
     }
 
     /**
@@ -52,20 +54,10 @@ public class InventoryApiImpl implements InventoryApiDelegate {
      * @return Inventario registrado exitosamente (status code 201)
      * @see InventoryApi#registerInventory
      */
-    public Mono<InventoryResponse> registerInventory(Mono<InventoryRequest> inventoryRequest, ServerWebExchange exchange) {
+    public Mono<InventoryResponse> registerInventory(Mono<InventoryRequest> inventoryRequest,
+            ServerWebExchange exchange) {
 
-    }
-
-    /**
-     * PUT /inventories/{productId} : Actualizar el inventario de una orden
-     *
-     * @param productId       (required)
-     * @param orderInvRequest (required)
-     * @return Inventario actualizado exitosamente (status code 200)
-     *         or Inventario no encontrado (status code 404)
-     * @see InventoryApi#updateInventory
-     */
-    public Mono<Void> updateInventory(String productId, Mono<OrderInvRequest> orderInvRequest, ServerWebExchange exchange) {
+        return inventoryService.createOrder(inventoryRequest);
 
     }
 

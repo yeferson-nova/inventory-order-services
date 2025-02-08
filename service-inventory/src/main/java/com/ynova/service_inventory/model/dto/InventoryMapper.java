@@ -9,10 +9,7 @@ import com.ynova.service_inventory.dto.InventoryResponse;
 import com.ynova.service_inventory.model.entity.ProductsModel;
 
 @Mapper
-public class InventoryMapper {
-
-    
-} InventoryMapper {
+public interface InventoryMapper {
     InventoryMapper INSTANCE = Mappers.getMapper(InventoryMapper.class);
 
     @Mapping(target = "code", source = "idProduct")

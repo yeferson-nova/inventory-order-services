@@ -1,5 +1,7 @@
 spring:
   r2dbc:
-    url: r2dbc:mysql://hots.docker.internal:3306/inventory
+    url: r2dbc:mysql://localhost:3306/inventory?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
     username: root
     password: 2357
+    pool:
+      enabled: true
