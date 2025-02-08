@@ -17,19 +17,24 @@ paths:
       summary: Listar todos los inventarios
       operationId: listInventory
       responses:
-        "200":
+        '200':
           description: Lista de inventarios
           content:
+            text/event-stream:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InventoryResponse'
             application/stream+json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/InventoryResponse"
+                  $ref: '#/components/schemas/InventoryResponse'
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/InventoryResponse"
+                  $ref: '#/components/schemas/InventoryResponse'
     post:
       tags:
         - Inventory
@@ -40,14 +45,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/InventoryRequest"
+              $ref: '#/components/schemas/InventoryRequest'
       responses:
-        "201":
+        '201':
           description: Inventario registrado exitosamente
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/InventoryResponse"
+                $ref: '#/components/schemas/InventoryResponse'
 
   /inventories/{productId}:
     get:
@@ -62,13 +67,13 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: Detalles del inventario del producto
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/InventoryResponse"
-        "404":
+                $ref: '#/components/schemas/InventoryResponse'
+        '404':
           description: Inventario no encontrado
 
     put:
@@ -87,11 +92,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/OrderInvRequest"
+              $ref: '#/components/schemas/OrderInvRequest'
       responses:
-        "200":
+        '200':
           description: Inventario actualizado exitosamente
-        "404":
+        '404':
           description: Inventario no encontrado
 components:
   schemas:

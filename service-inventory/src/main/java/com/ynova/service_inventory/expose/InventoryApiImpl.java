@@ -1,5 +1,7 @@
 package com.ynova.service_inventory.expose;
 
+import java.time.Duration;
+
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 
@@ -44,7 +46,7 @@ public class InventoryApiImpl implements InventoryApiDelegate {
      * @see InventoryApi#listInventory
      */
     public Flux<InventoryResponse> listInventory(ServerWebExchange exchange) {
-        return inventoryService.getList();
+        return inventoryService.getList().delayElements(Duration.ofSeconds(2));
     }
 
     /**
